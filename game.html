@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/bjd.css" />
+    <title>Blackjack Down</title>
+    <script>
+      function sendBetRequest(element) {
+        var betAmount = document.getElementById("betInput").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (xhttp.readyState === 4 && xhttp.status === 200) {
+            var result = document.getElementById(element);
+            result.innerHTML = xhttp.responseText;
+          }
+        };
+        xhttp.open("POST", "game.php", true);
+        xhttp.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        xhttp.send("bet=" + betAmount);
+      }
+      function sendRequest(param, element) {
+        if (typeof param !== "string") {
+          throw new Error("sendRequest requires a string parameter 'param'");
+        }
+        if (typeof element !== "string") {
+          throw new Error("sendRequest requires a string parameter 'element'");
+        }
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (xhttp.readyState === 4 && xhttp.status === 200) {
+            var result = document.getElementById(element);
+            result.innerHTML = xhttp.responseText;
+          }
+        };
+        xhttp.open("GET", "game.php?" + param, true);
+        xhttp.send();
+      }
+      function validateInput(event) {
+        var key = event.key;
+        if (
+          !(
+            event.ctrlKey ||
+            event.altKey ||
+            (48 <= event.keyCode && event.keyCode <= 57) ||
+            event.key === "Backspace"
+          )
+        ) {
+          event.preventDefault();
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <main class="gamebody" id="gamebody">
+      <input
+        class="startGameButton"
+        type="button"
+        value="Start Game"
+        onclick="sendRequest('start=1','gamebody')"
+      />
+
+      <!--  wird vom Server ausgegeben: - danach steuert der spieler
+        das "game" mit "hit"-> element=player und die bank mit "stand"-> element = dealer
+      <div class="gamewrapper" id="dealer"></div> 
+
+    <div class="gamewrapper" id="player"></div>
+
+    <input type="button" value="hit" name="hit" onclick="hit()" /> 
+    </div> -->
+    </main>
+  </body>
+</html>

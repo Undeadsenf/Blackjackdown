@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Button Example</title>
+    <script>
+      function hit() {
+        document.getElementById("message").innerHTML = "Button was clicked!";
+      }
+    </script>
+    <style>
+      main {
+        flex: 1;
+      }
+
+      aside {
+        flex: 0 0 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex;">
+      <aside>
+        <h2>Sidebar</h2>
+        <p>This is a sidebar with related links or information.</p>
+      </aside>
+      <main>
+        <h1>Main Content</h1>
+        <p>This is the main content of the page.</p>
+      </main>
+    </div>
+    <input type="button" value="hit" name="hit" onclick="hit()" />
+    <div id="message"></div>
+  </body>
+</html>

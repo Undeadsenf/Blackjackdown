@@ -1,0 +1,1 @@
+This is a beginner Project for a web based Blackjack game in PHP.
